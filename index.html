@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Resortarest | Your Home in the Mountains</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Pinyon+Script&display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#D17A4D",
+                        "forest-green": "#2B3A2F",
+                        "beige-light": "#E8E3D9",
+                        "background-light": "#E8E3D9",
+                        "background-dark": "#1a1a1a",
+                    },
+                    fontFamily: {
+                        display: ["Cormorant Garamond", "serif"],
+                        serif: ["Playfair Display", "serif"],
+                        script: ["Pinyon Script", "cursive"],
+                        sans: ["Montserrat", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0px",
+                    },
+                },
+            },
+        };
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-forest-green dark:text-beige-light selection:bg-primary selection:text-white">
+
+    <!-- ==========================================
+         PRELOADER
+         ========================================== -->
+    <div id="preloader" class="fixed inset-0 z-[9999] bg-forest-green flex items-center justify-center">
+        <h1 class="font-script text-7xl md:text-8xl lg:text-9xl text-beige-light preloader-text">
+            Resortarest
+        </h1>
+    </div>
+
+    <!-- Fixed Navigation -->
+    <nav id="main-nav"
+        class="fixed top-0 w-full z-50 px-8 py-6 flex justify-between items-center transition-all duration-300">
+        <div class="text-2xl font-display font-bold tracking-widest">RESORTAREST</div>
+        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-medium">
+            <a class="nav-link hover:text-primary transition-colors" href="#hotel">Hotel</a>
+            <a class="nav-link hover:text-primary transition-colors" href="#culinary">Culinary</a>
+            <a class="nav-link hover:text-primary transition-colors" href="#nature">Nature</a>
+            <a class="nav-link hover:text-primary transition-colors" href="#about">Us</a>
+        </div>
+        <div class="flex space-x-6 text-sm items-center">
+            <a class="hidden md:block hover:opacity-70 transition-opacity" href="#">EN</a>
+            <button
+                class="hidden md:block bg-primary px-6 py-2 text-white rounded-full hover:bg-opacity-90 transition-all hover:scale-105">BOOK
+                NOW</button>
+
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-1.5 w-8 h-6 justify-center items-end">
+                <span class="hamburger-line w-full h-0.5 bg-current transition-all"></span>
+                <span class="hamburger-line w-full h-0.5 bg-current transition-all"></span>
+                <span class="hamburger-line w-full h-0.5 bg-current transition-all"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="mobile-menu fixed inset-0 z-[100] bg-beige-light transform translate-x-full transition-transform duration-500">
+        <div class="p-8">
+            <!-- Close Button -->
+            <div class="flex justify-between items-center mb-16">
+                <div class="text-2xl font-display font-bold tracking-widest text-forest-green">RESORTAREST</div>
+                <button id="mobile-menu-close" class="w-8 h-8 flex items-center justify-center text-forest-green">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Menu Links -->
+            <nav class="flex flex-col space-y-6">
+                <a href="#hotel"
+                    class="mobile-menu-link text-3xl font-display text-forest-green hover:text-primary transition-colors">Hotel</a>
+                <a href="#culinary"
+                    class="mobile-menu-link text-3xl font-display text-forest-green hover:text-primary transition-colors">Culinary</a>
+                <a href="#nature"
+                    class="mobile-menu-link text-3xl font-display text-forest-green hover:text-primary transition-colors">Nature</a>
+                <a href="#about"
+                    class="mobile-menu-link text-3xl font-display text-forest-green hover:text-primary transition-colors">Us</a>
+                <a href="#faq"
+                    class="mobile-menu-link text-3xl font-display text-forest-green hover:text-primary transition-colors">FAQ</a>
+                <a href="#contact"
+                    class="mobile-menu-link text-3xl font-display text-forest-green hover:text-primary transition-colors">Contact</a>
+
+                <div class="pt-6">
+                    <a href="#"
+                        class="text-lg text-forest-green hover:text-primary transition-colors flex items-center">
+                        EN
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Booking Dialog -->
+    <div id="booking-dialog" class="booking-dialog fixed inset-0 z-[200] hidden">
+        <!-- Backdrop -->
+        <div class="booking-dialog-backdrop absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+
+        <!-- Dialog Card -->
+        <div class="booking-dialog-card relative flex items-center justify-center min-h-screen p-4">
+            <div class="relative bg-beige-light rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                <!-- Close Button -->
+                <button id="close-booking-dialog"
+                    class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-forest-green hover:text-primary transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <!-- Dialog Content -->
+                <div class="p-8 md:p-12">
+                    <h2 class="text-4xl font-display font-bold text-forest-green mb-2">Book Your Stay</h2>
+                    <p class="text-forest-green/60 mb-8">Fill in your details and we'll check availability for you.</p>
+
+                    <form id="booking-form" class="space-y-6">
+                        <!-- Check-in & Check-out -->
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-forest-green mb-2">Check-in</label>
+                                <input type="date" required
+                                    class="w-full px-4 py-3 bg-white border border-forest-green/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-forest-green">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-forest-green mb-2">Check-out</label>
+                                <input type="date" required
+                                    class="w-full px-4 py-3 bg-white border border-forest-green/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-forest-green">
+                            </div>
+                        </div>
+
+                        <!-- Guests & Room Type -->
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-forest-green mb-2">Guests</label>
+                                <select required
+                                    class="w-full px-4 py-3 bg-white border border-forest-green/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-forest-green">
+                                    <option value="">Select number of guests</option>
+                                    <option value="1">1 Guest</option>
+                                    <option value="2">2 Guests</option>
+                                    <option value="3">3 Guests</option>
+                                    <option value="4">4 Guests</option>
+                                    <option value="5+">5+ Guests</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-forest-green mb-2">Room Type</label>
+                                <select required
+                                    class="w-full px-4 py-3 bg-white border border-forest-green/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-forest-green">
+                                    <option value="">Select room type</option>
+                                    <option value="standard">Standard Room</option>
+                                    <option value="deluxe">Deluxe Room</option>
+                                    <option value="suite">Suite</option>
+                                    <option value="chalet">Mountain Chalet</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Special Requests -->
+                        <div>
+                            <label class="block text-sm font-medium text-forest-green mb-2">Special Requests
+                                (Optional)</label>
+                            <textarea rows="4"
+                                class="w-full px-4 py-3 bg-white border border-forest-green/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-forest-green resize-none"
+                                placeholder="Any special requirements or requests..."></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit"
+                            class="w-full bg-primary text-white py-4 rounded-full font-medium text-lg hover:bg-primary/90 transition-all hover:scale-[1.02]">
+                            Check Availability
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section with Video Background -->
+    <section id="hero"
+        class="hero relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#3D4F3D]">
+
+        <!-- Video Background (Default) -->
+        <video class="hero-video absolute inset-0 w-full h-full object-cover" style="z-index: 1;" autoplay muted loop
+            playsinline>
+            <source src="https://cdn.pixabay.com/video/2020/07/30/46026-447087782_large.mp4" type="video/mp4">
+        </video>
+
+        <!-- Background Layer: Dynamic Images (shown on nav hover) -->
+        <div class="hero-backgrounds absolute inset-0" style="z-index: 2;">
+            <!-- Nature Background -->
+            <div class="hero-bg hero-bg-nature absolute inset-0 opacity-0 transition-opacity duration-700">
+                <img src="https://images.pexels.com/photos/1179229/pexels-photo-1179229.jpeg?auto=compress&cs=tinysrgb&w=1920"
+                    alt="Forest nature" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-black/10"></div>
+            </div>
+
+            <!-- Culinary Background -->
+            <div class="hero-bg hero-bg-culinary absolute inset-0 opacity-0 transition-opacity duration-700">
+                <img src="https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=1920"
+                    alt="Gourmet food" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-black/10"></div>
+            </div>
+
+            <!-- Rooms/Hotel Background -->
+            <div class="hero-bg hero-bg-rooms absolute inset-0 opacity-0 transition-opacity duration-700">
+                <img src="https://images.pexels.com/photos/1579739/pexels-photo-1579739.jpeg?auto=compress&cs=tinysrgb&w=1920"
+                    alt="Hotel room" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-black/10"></div>
+            </div>
+
+            <!-- Team/Us Background -->
+            <div class="hero-bg hero-bg-team absolute inset-0 opacity-0 transition-opacity duration-700">
+                <img src="https://images.pexels.com/photos/3184398/pexels-photo-3184398.jpeg?auto=compress&cs=tinysrgb&w=1920"
+                    alt="Team" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-black/10"></div>
+            </div>
+        </div>
+
+        <!-- State 1: Default Content (Welcome to Resortarest) -->
+        <div
+            class="hero-default-content absolute inset-0 z-10 flex items-start justify-center pt-32 md:pt-40 lg:pt-48 transition-opacity duration-500">
+            <!-- Large Typography - Centered -->
+            <div class="text-center">
+                <!-- "Welcome to" text -->
+                <h1
+                    class="text-[5.5rem] md:text-[5.5rem] lg:text-[7rem] xl:text-[8.5rem] font-display text-beige-light leading-[1.1] tracking-tight">
+                    Welcome to
+                </h1>
+                <!-- "Resortarest" text -->
+                <p
+                    class="font-script text-white text-[3.5rem] md:text-[4rem] lg:text-[5rem] mt-[-0.5rem] md:mt-[-1rem]">
+                    Resortarest.
+                </p>
+            </div>
+
+            <!-- Floating Images -->
+            <!-- <div class="absolute top-20 right-8 md:right-12 lg:right-16 w-40 md:w-56 lg:w-72 h-40 md:h-52 lg:h-64 z-20 hero-float-image"
+                data-parallax data-parallax-speed="0.08">
+                <img src="https://images.pexels.com/photos/869258/pexels-photo-869258.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Snowy mountains" class="w-full h-full object-cover shadow-2xl" />
+            </div>
+
+            <div class="absolute bottom-28 left-4 md:left-12 w-36 md:w-48 lg:w-56 h-40 md:h-48 z-20 hero-float-image"
+                data-parallax data-parallax-speed="0.12">
+                <img src="https://images.pexels.com/photos/1435895/pexels-photo-1435895.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="Alpine cuisine" class="w-full h-full object-cover shadow-2xl" />
+            </div> -->
+        </div>
+
+        <!-- State 2: Active Content (Your Home, at Resortarest) - Shows when nav is hovered -->
+        <div
+            class="hero-active-content absolute inset-0 z-10 flex items-start justify-center pt-32 md:pt-40 lg:pt-48 opacity-0 pointer-events-none transition-opacity duration-500">
+            <div class="text-center">
+                <h1
+                    class="text-[3.5rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] font-display text-beige-light leading-[1.1]">
+                    Your <span class="italic">Home</span>,
+                </h1>
+                <p
+                    class="font-script text-white text-[2.8rem] md:text-[4rem] lg:text-[5rem] mt-[-0.5rem] md:mt-[-1rem]">
+                    at Resortarest.
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Side: Navigation Links (Always Visible) -->
+        <nav
+            class="hero-nav-links absolute right-8 md:right-12 lg:right-20 top-[58%] -translate-y-1/2 z-30 flex flex-col gap-3 text-right">
+            <a href="#nature"
+                class="hero-section-link text-beige-light/60 hover:text-beige-light text-lg md:text-xl lg:text-2xl font-medium transition-all duration-300"
+                data-target="nature">
+                In Nature.
+            </a>
+            <a href="#culinary"
+                class="hero-section-link text-beige-light/60 hover:text-beige-light text-lg md:text-xl lg:text-2xl font-medium transition-all duration-300"
+                data-target="culinary">
+                At The Table.
+            </a>
+            <a href="#hotel"
+                class="hero-section-link text-beige-light/60 hover:text-beige-light text-lg md:text-xl lg:text-2xl font-medium transition-all duration-300"
+                data-target="rooms">
+                In Our Rooms.
+            </a>
+            <a href="#about"
+                class="hero-section-link text-beige-light/60 hover:text-beige-light text-lg md:text-xl lg:text-2xl font-medium transition-all duration-300"
+                data-target="team">
+                With Us.
+            </a>
+        </nav>
+
+        <!-- Booking Button Bar -->
+        <div
+            class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3 bg-white rounded-full px-4 py-2 shadow-xl">
+            <!-- Calendar Icon -->
+            <svg class="w-5 h-5 text-forest-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+
+            <span class="text-sm font-medium text-forest-green">Booking</span>
+
+            <!-- Open Dialog Button -->
+            <button id="open-booking-dialog"
+                class="bg-primary text-white text-sm font-medium px-6 py-2 rounded-full hover:bg-primary/90 transition-all">
+                Check Availability
+            </button>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-28 left-1/2 -translate-x-1/2 z-20 scroll-indicator opacity-50">
+            <div class="w-6 h-10 border-2 border-beige-light/50 rounded-full flex justify-center pt-2">
+                <div class="w-1 h-2 bg-beige-light/70 rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-32 px-8 md:px-24 bg-beige-light dark:bg-zinc-900">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-8" data-scroll-reveal>
+                <p class="uppercase text-[10px] tracking-[0.3em] mb-8 font-sans">Experience Life at Resortarest</p>
+                <h2 class="text-4xl md:text-6xl font-display leading-tight">
+                    Find your room in the mountains, enjoy what <span class="italic font-serif">our kitchen</span>
+                    creates in harmony with the seasons, and let <span class="font-script lowercase text-5xl">our
+                        story</span> become part of yours.
+                </h2>
+            </div>
+            <div class="md:col-span-4 relative h-[400px]" data-scroll-reveal data-delay="200">
+                <img alt="Resort interior"
+                    class="image-stack w-2/3 h-64 object-cover absolute top-0 right-0 shadow-2xl z-20"
+                    src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    data-parallax data-parallax-speed="-0.1" />
+                <img alt="Chef plating"
+                    class="image-stack w-1/2 h-48 object-cover absolute bottom-0 left-0 shadow-xl z-30"
+                    src="https://images.pexels.com/photos/3338497/pexels-photo-3338497.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    data-parallax data-parallax-speed="-0.15" />
+                <img alt="Mountain view"
+                    class="image-stack w-1/3 h-32 object-cover absolute top-12 left-8 shadow-lg z-10 opacity-50"
+                    src="https://images.pexels.com/photos/1770809/pexels-photo-1770809.jpeg?auto=compress&cs=tinysrgb&w=400"
+                    data-parallax data-parallax-speed="-0.05" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Grid -->
+    <section id="hotel" class="py-16 bg-white dark:bg-black">
+        <div class="grid md:grid-cols-3 gap-1">
+            <!-- Image with Grayscale Effect -->
+            <div class="relative group overflow-hidden h-[600px]" data-scroll-reveal>
+                <img alt="Resort exterior" class="image-reveal w-full h-full object-cover"
+                    src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=800" />
+            </div>
+
+            <!-- Content Card -->
+            <div class="bg-beige-light dark:bg-zinc-800 p-12 flex flex-col justify-between" data-scroll-reveal
+                data-delay="100">
+                <div>
+                    <p class="uppercase text-[10px] tracking-widest mb-4">Active in Summer</p>
+                    <p class="text-sm leading-relaxed">Hike in the Passeier Valley directly from the hotel, no car
+                        needed. Numerous trails start right at our doorstep, from easy alpine walks to challenging
+                        summit and climbing tours in the breathtaking mountains.</p>
+                </div>
+                <div class="mt-8">
+                    <button
+                        class="bg-primary text-white px-8 py-3 text-xs uppercase tracking-widest hover:brightness-110 transition-all hover:scale-105 rounded-full">Experience
+                        summer</button>
+                </div>
+                <div class="h-64 mt-8 overflow-hidden">
+                    <img alt="Hiker in forest"
+                        class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                        src="https://images.pexels.com/photos/554609/pexels-photo-554609.jpeg?auto=compress&cs=tinysrgb&w=600" />
+                </div>
+            </div>
+
+            <!-- Image -->
+            <div class="relative group overflow-hidden h-[600px]" data-scroll-reveal data-delay="200">
+                <img alt="Relaxation"
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                    src="https://images.pexels.com/photos/3225531/pexels-photo-3225531.jpeg?auto=compress&cs=tinysrgb&w=800" />
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         EXPERIENCES SECTION - Jägerhof Style
+         ========================================== -->
+
+    <!-- NATURE SUBSECTION -->
+    <section id="nature" class="grid md:grid-cols-2 min-h-screen items-stretch">
+        <!-- Left: Content (Forest Green) -->
+        <div class="bg-forest-green text-beige-light flex items-center justify-center p-12 md:p-16 lg:p-24">
+            <div class="max-w-lg" data-scroll-reveal>
+                <p class="uppercase text-xs tracking-[0.3em] mb-8 text-primary">Nature</p>
+                <h3 class="text-4xl md:text-5xl lg:text-6xl font-display mb-8 leading-[1.1]">
+                    Where nature<br>becomes <span class="italic">home</span>
+                </h3>
+                <p class="text-base leading-relaxed mb-4 opacity-80">
+                    Nestled in the gentle hills and crisp mountain air, Resortarest invites you to experience nature
+                    with all your senses.
+                </p>
+                <p class="text-base font-medium mb-8">Authentic, pure, and within reach.</p>
+                <button
+                    class="bg-primary text-white px-8 py-3 text-sm uppercase tracking-widest hover:brightness-110 transition-all rounded-full">
+                    Discover nature
+                </button>
+            </div>
+        </div>
+        <!-- Right: Images with Parallax -->
+        <div class="relative overflow-hidden min-h-[750px] bg-cover bg-top bg-no-repeat"
+            style="background-image: url('https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=1200');"
+            data-scroll-reveal data-delay="200">
+            <!-- Small Floating Image - Centered -->
+            <img alt="Mountain cabin"
+                class="absolute bottom-16 right-4 md:top-1/2 md:-translate-y-1/2 md:left-1/2 md:-translate-x-1/2 md:right-auto w-36 md:w-52 h-44 md:h-64 object-cover border-4 border-white shadow-2xl z-10"
+                src="https://images.pexels.com/photos/803975/pexels-photo-803975.jpeg?auto=compress&cs=tinysrgb&w=400"
+                data-parallax data-parallax-speed="0.1" />
+        </div>
+    </section>
+
+    <!-- CULINARY SUBSECTION -->
+    <section id="culinary" class="grid md:grid-cols-2 min-h-screen items-stretch">
+        <!-- Left: Images with Parallax -->
+        <div class="relative overflow-hidden min-h-[750px] order-2 md:order-1 bg-cover bg-top bg-no-repeat"
+            style="background-image: url('https://images.pexels.com/photos/1435895/pexels-photo-1435895.jpeg?auto=compress&cs=tinysrgb&w=1200');"
+            data-scroll-reveal data-delay="200">
+            <!-- Small Floating Image - Centered -->
+            <img alt="Chef portrait"
+                class="absolute top-28 right-4 md:top-1/2 md:-translate-y-1/2 md:left-1/2 md:-translate-x-1/2 w-36 md:w-52 h-48 md:h-64 object-cover border-4 border-white shadow-2xl z-10"
+                src="https://images.pexels.com/photos/3814446/pexels-photo-3814446.jpeg?auto=compress&cs=tinysrgb&w=400"
+                data-parallax data-parallax-speed="0.1" />
+        </div>
+        <!-- Right: Content (Forest Green) -->
+        <div
+            class="bg-forest-green text-beige-light flex items-center justify-center p-12 md:p-16 lg:p-24 order-1 md:order-2">
+            <div class="max-w-lg" data-scroll-reveal>
+                <p class="uppercase text-xs tracking-[0.3em] mb-8 text-primary">Indulgence</p>
+                <h3 class="text-4xl md:text-5xl lg:text-6xl font-display mb-8 leading-[1.1]">
+                    Honest. Local.<br><span class="italic">Sustainable.</span>
+                </h3>
+                <p class="text-base leading-relaxed mb-8 opacity-80">
+                    At Resortarest, you can taste the local flavors, from hearty alpine dishes to fine regional
+                    specialties. Prepared with love, using the best local ingredients, for genuine enjoyment you can
+                    feel good about.
+                </p>
+                <button
+                    class="bg-primary text-white px-8 py-3 text-sm uppercase tracking-widest hover:brightness-110 transition-all rounded-full">
+                    Enjoy the Flavor
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROOMS SUBSECTION -->
+    <section id="rooms" class="grid md:grid-cols-2 min-h-screen items-stretch">
+        <!-- Left: Content (Forest Green) -->
+        <div class="bg-forest-green text-beige-light flex items-center justify-center p-12 md:p-16 lg:p-24">
+            <div class="max-w-lg" data-scroll-reveal>
+                <p class="uppercase text-xs tracking-[0.3em] mb-8 text-primary">Accommodation</p>
+                <h3 class="text-4xl md:text-5xl lg:text-6xl font-display mb-8 leading-[1.1]">
+                    Your <span class="italic">retreat</span><br>in the mountains
+                </h3>
+                <p class="text-base leading-relaxed mb-4 opacity-80">
+                    Resortarest is nestled in the mountains at over 1,300 meters above sea level, offering a unique
+                    setting between tranquility, nature, and breathtaking mountain views.
+                </p>
+                <p class="text-base leading-relaxed mb-8 opacity-80">
+                    Each room is designed to bring you closer to nature while providing all modern comforts for a truly
+                    restful stay.
+                </p>
+                <button
+                    class="bg-primary text-white px-8 py-3 text-sm uppercase tracking-widest hover:brightness-110 transition-all rounded-full">
+                    Explore Rooms
+                </button>
+            </div>
+        </div>
+        <!-- Right: Images with Parallax -->
+        <div class="relative overflow-hidden min-h-[750px] bg-cover bg-top bg-no-repeat"
+            style="background-image: url('https://images.pexels.com/photos/1579739/pexels-photo-1579739.jpeg?auto=compress&cs=tinysrgb&w=1200');"
+            data-scroll-reveal data-delay="200">
+            <!-- Small Floating Image - Centered -->
+            <img alt="Room with mountain view"
+                class="absolute bottom-16 right-4 md:top-1/2 md:-translate-y-1/2 md:left-1/2 md:-translate-x-1/2 md:right-auto w-36 md:w-52 h-44 md:h-64 object-cover border-4 border-white shadow-2xl z-10"
+                src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=400"
+                data-parallax data-parallax-speed="0.1" />
+        </div>
+    </section>
+
+    <!-- SPA SUBSECTION -->
+    <section id="spa" class="grid md:grid-cols-2 min-h-screen items-stretch">
+        <!-- Left: Images with Parallax (Stacked) -->
+        <div class="relative overflow-hidden min-h-[750px] order-2 md:order-1 bg-cover bg-top bg-no-repeat"
+            style="background-image: url('https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=1200');"
+            data-scroll-reveal data-delay="100">
+            <!-- Small Floating Image - Centered -->
+            <img alt="Relaxation"
+                class="absolute top-16 left-4 md:top-1/2 md:-translate-y-1/2 md:left-1/2 md:-translate-x-1/2 w-36 md:w-52 h-44 md:h-64 object-cover border-4 border-white shadow-2xl z-10"
+                src="https://images.pexels.com/photos/3997993/pexels-photo-3997993.jpeg?auto=compress&cs=tinysrgb&w=400"
+                data-parallax data-parallax-speed="0.1" />
+        </div>
+        <!-- Right: Content (Forest Green) -->
+        <div
+            class="bg-forest-green text-beige-light flex items-center justify-center p-12 md:p-16 lg:p-24 order-1 md:order-2">
+            <div class="max-w-lg" data-scroll-reveal>
+                <p class="uppercase text-xs tracking-[0.3em] mb-8 text-primary">Feel Good</p>
+                <h3 class="text-4xl md:text-5xl lg:text-6xl font-display mb-8 leading-[1.1]">
+                    Relax. Unwind.<br><span class="italic">Enjoy.</span>
+                </h3>
+                <p class="text-base leading-relaxed mb-4 opacity-80">
+                    Spanning 200 m², our sauna area invites you to relax, ease your muscles, and do something good for
+                    your respiratory system.
+                </p>
+                <p class="text-base leading-relaxed mb-8 opacity-80">
+                    Cozy warmth, soothing silence, and views of nature create moments of true relaxation. Unwind in the
+                    Finnish sauna, steam sauna, or infrared cabin. Or enjoy a break in the whirlpool and let your soul
+                    drift in the comfortable relaxation room.
+                </p>
+                <button
+                    class="bg-primary text-white px-8 py-3 text-sm uppercase tracking-widest hover:brightness-110 transition-all rounded-full">
+                    Enjoy Sauna & Peace
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SUSTAINABILITY SECTION - Scroll Expansion
+         ========================================== -->
+    <section id="sustainability" class="expand-section relative bg-forest-green">
+        <!-- Spacer for scroll area -->
+        <div class="expand-spacer h-[200vh]">
+            <!-- Sticky container -->
+            <div class="expand-sticky sticky top-0 h-screen overflow-hidden bg-forest-green">
+                <!-- Expanding image with clip-path -->
+                <div class="expand-image w-full h-full bg-cover bg-center bg-no-repeat"
+                    style="background-image: url('https://images.pexels.com/photos/1179229/pexels-photo-1179229.jpeg?auto=compress&cs=tinysrgb&w=1920'); clip-path: inset(20% 8% 55% 8% round 30px);"
+                    data-expand-image>
+                    <!-- Dark overlay for text readability -->
+                    <div class="absolute inset-0 bg-black/30"></div>
+                </div>
+
+                <!-- Text content overlay -->
+                <div class="expand-content absolute inset-0 z-20 flex items-center justify-center text-center text-white p-8"
+                    data-expand-content>
+                    <div class="max-w-2xl">
+                        <p class="uppercase text-xs tracking-[0.3em] mb-6 text-primary opacity-0 expand-fade-in">
+                            Responsibility from Conviction
+                        </p>
+                        <h2 class="text-4xl md:text-6xl lg:text-7xl font-display mb-8 leading-[1.1] opacity-0 expand-fade-in"
+                            style="transition-delay: 100ms;">
+                            Our Commitment<br>to <span class="italic">Sustainability</span>
+                        </h2>
+                        <p class="text-base md:text-lg leading-relaxed mb-8 opacity-80 max-w-xl mx-auto opacity-0 expand-fade-in"
+                            style="transition-delay: 200ms;">
+                            We live what we love and we do so responsibly. At Resortarest, we focus on regional
+                            products,
+                            short supply chains, and a respectful approach to people and nature. It's more than a trend.
+                            It's a mindset that lasts.
+                        </p>
+                        <button
+                            class="bg-primary text-white px-8 py-3 text-sm uppercase tracking-widest hover:brightness-110 transition-all rounded-full opacity-0 expand-fade-in"
+                            style="transition-delay: 300ms;">
+                            This is how we think
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horizontal Marquee -->
+
+    <section class="py-24 bg-beige-light dark:bg-zinc-900 overflow-hidden border-y border-forest-green/10">
+        <div class="marquee-container whitespace-nowrap">
+            <div
+                class="marquee text-[8rem] md:text-[12rem] font-display text-forest-green/5 dark:text-beige-light/5 uppercase flex gap-12 select-none">
+                <span>Pure Nature</span>
+                <span class="italic font-serif">•</span>
+                <span class="italic font-serif">Alpine Cuisine</span>
+                <span class="italic font-serif">•</span>
+                <span>Mountain Retreat</span>
+                <span class="italic font-serif">•</span>
+                <span>Pure Nature</span>
+                <span class="italic font-serif">•</span>
+                <span class="italic font-serif">Alpine Cuisine</span>
+                <span class="italic font-serif">•</span>
+                <span>Mountain Retreat</span>
+                <span class="italic font-serif">•</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-32 bg-beige-light dark:bg-zinc-900 px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div data-scroll-reveal>
+                    <p class="uppercase text-[10px] tracking-widest mb-4">Guest Voices</p>
+                    <h2 class="text-5xl font-display">What our guests say</h2>
+                </div>
+                <div class="max-w-sm" data-scroll-reveal data-delay="100">
+                    <p class="text-sm opacity-70 mb-6">Real experiences and honest words. Discover how our guests have
+                        experienced their stay. Authentic impressions that say more than any description.</p>
+                    <button
+                        class="bg-primary text-white px-8 py-3 text-xs uppercase tracking-widest hover:brightness-110 transition-all rounded-full">Share
+                        your experience</button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-forest-green p-12 text-beige-light h-full flex flex-col justify-between"
+                    data-scroll-reveal data-delay="0">
+                    <div>
+                        <div class="flex mb-8 text-primary text-xl">★★★★★</div>
+                        <p class="italic font-serif text-lg leading-relaxed mb-8">"The rooms were very tastefully
+                            furnished. Very nice and well-maintained wellness area. The food was outstanding. Service
+                            was friendly and courteous."</p>
+                    </div>
+                    <div class="border-t border-white/20 pt-6">
+                        <p class="text-xs uppercase tracking-widest">Christian H.</p>
+                        <p class="text-[10px] opacity-50 mt-1 uppercase">Germany</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card bg-forest-green p-12 text-beige-light h-full flex flex-col justify-between"
+                    data-scroll-reveal data-delay="150">
+                    <div>
+                        <div class="flex mb-8 text-primary text-xl">★★★★★</div>
+                        <p class="italic font-serif text-lg leading-relaxed mb-8">"Wonderful family run hotel. Great
+                            location, clean rooms, and delicious, authentic local food. Highly recommended!"</p>
+                    </div>
+                    <div class="border-t border-white/20 pt-6">
+                        <p class="text-xs uppercase tracking-widest">Anna M.</p>
+                        <p class="text-[10px] opacity-50 mt-1 uppercase">Italy</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card bg-forest-green p-12 text-beige-light h-full flex flex-col justify-between"
+                    data-scroll-reveal data-delay="300">
+                    <div>
+                        <div class="flex mb-8 text-primary text-xl">★★★★★</div>
+                        <p class="italic font-serif text-lg leading-relaxed mb-8">"Wonderful hotel, relaxing spa, and
+                            excellent food. Friendliness and attention to detail! Highly recommended!"</p>
+                    </div>
+                    <div class="border-t border-white/20 pt-6">
+                        <p class="text-xs uppercase tracking-widest">Alexandra S.</p>
+                        <p class="text-[10px] opacity-50 mt-1 uppercase">Italy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainability Section with Parallax Background -->
+    <section id="about" class="relative py-48 px-8 flex items-center justify-center text-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img alt="Forest floor" class="w-full h-full object-cover"
+                src="https://images.pexels.com/photos/1179229/pexels-photo-1179229.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                data-scroll-reveal />
+            <div class="absolute inset-0 bg-black/50"></div>
+        </div>
+        <div class="relative z-10 max-w-2xl text-white" data-parallax data-parallax-speed="0.18>
+            <p class=" uppercase text-[10px] tracking-widest mb-8">Respect for Nature</p>
+            <h2 class="text-5xl md:text-7xl font-display mb-10">Our Commitment to Sustainability</h2>
+            <p class="text-sm leading-relaxed mb-10 opacity-90">We live what we love and we do so responsibly. We focus
+                on regional products, short supply chains, and a respectful approach to people and nature. It's less
+                than a trend, it's a mindset that lasts.</p>
+            <button
+                class="bg-primary px-10 py-4 text-xs uppercase tracking-widest hover:bg-white hover:text-primary transition-all duration-300 rounded-full">This
+                is how we think</button>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-24 bg-beige-light dark:bg-zinc-900 text-center">
+        <h2 class="text-6xl md:text-8xl font-display text-forest-green dark:text-beige-light" data-scroll-reveal>
+            Come stay <span class="font-script lowercase text-4xl md:text-6xl text-primary">with us.</span>
+        </h2>
+        <div class="mt-12 flex flex-wrap justify-center items-center gap-8 text-xs uppercase tracking-widest opacity-60"
+            data-scroll-reveal data-delay="100">
+            <a class="hover:opacity-100 hover:text-primary transition-all" href="#hotel">Hotel</a>
+            <a class="hover:opacity-100 hover:text-primary transition-all" href="#culinary">Culinary</a>
+            <a class="hover:opacity-100 hover:text-primary transition-all" href="#nature">Nature</a>
+            <a class="hover:opacity-100 hover:text-primary transition-all" href="#about">Us</a>
+            <a class="hover:opacity-100 hover:text-primary transition-all" href="#">FAQ</a>
+            <a class="hover:opacity-100 hover:text-primary transition-all" href="#">Contact</a>
+        </div>
+        <button
+            class="mt-12 px-8 py-3 bg-primary text-white rounded-full font-medium hover:bg-primary/90 transition-all">Get
+            in
+            touch.</button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-beige-light dark:bg-zinc-950 border-t border-forest-green/10 py-24 px-8 md:px-24">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-16 text-center md:text-left">
+                <div>
+                    <div class="text-3xl font-display font-bold tracking-widest mb-8">RESORTAREST</div>
+                    <div class="flex space-x-4 mb-8 justify-center md:justify-start">
+                        <a class="w-10 h-10 border border-forest-green/20 rounded-full flex items-center justify-center hover:bg-forest-green hover:text-white transition-all"
+                            href="#">FB</a>
+                        <a class="w-10 h-10 border border-forest-green/20 rounded-full flex items-center justify-center hover:bg-forest-green hover:text-white transition-all"
+                            href="#">IG</a>
+                    </div>
+                    <div class="flex flex-col gap-3 max-w-xs mx-auto md:mx-0">
+                        <input
+                            class="w-full px-4 py-2 bg-white border border-forest-green/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                            placeholder="Email Address" type="email" />
+                        <button
+                            class="bg-primary text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-primary/90 transition-all">Sign
+                            Up</button>
+                    </div>
+                    <label class="flex items-center mt-4 cursor-pointer justify-center md:justify-start">
+                        <input
+                            class="form-checkbox text-primary bg-transparent border-forest-green/20 rounded-none focus:ring-0"
+                            type="checkbox" />
+                        <span class="ml-2 text-[10px] opacity-60 uppercase">I accept the Privacy Policy</span>
+                    </label>
+                </div>
+                <div>
+                    <h4 class="uppercase text-[10px] font-bold tracking-[0.2em] mb-8">Resort</h4>
+                    <ul class="space-y-4 text-xs opacity-70">
+                        <li><a class="hover:text-primary transition-colors" href="#nature">In nature.</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#culinary">At the table.</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#hotel">In our rooms.</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#about">With us.</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="uppercase text-[10px] font-bold tracking-[0.2em] mb-8">Privacy Policy</h4>
+                    <ul class="space-y-4 text-xs opacity-70">
+                        <li><a class="hover:text-primary transition-colors" href="#">Legal Notice</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Disclaimer</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Cookie Preferences</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="uppercase text-[10px] font-bold tracking-[0.2em] mb-8">Contact</h4>
+                    <ul class="space-y-4 text-xs opacity-70">
+                        <li>Book a room</li>
+                        <li>Show route</li>
+                        <li>Get in touch</li>
+                        <li>+1 234 567 8900</li>
+                        <li>info@resortarest.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="mt-24 pt-8 border-t border-forest-green/10 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="text-[10px] opacity-50 uppercase tracking-widest text-center md:text-left">
+                    <p>© 2025 Resortarest — All Rights Reserved.</p>
+                </div>
+                <div class="text-[10px] opacity-50 uppercase tracking-widest">
+                    <p>Created with ❤️</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+</body>
+
+</html>

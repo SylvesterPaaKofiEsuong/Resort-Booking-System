@@ -1,0 +1,615 @@
+/* ==========================================
+   Resort De Code - Custom Effects Stylesheet
+   Jägerhof-Style Scroll & Parallax Effects
+   ========================================== */
+
+/* ==========================================
+   CSS Custom Properties (Variables)
+   ========================================== */
+:root {
+    --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --animation-duration: 0.8s;
+    --parallax-perspective: 1000px;
+}
+
+/* ==========================================
+   Global Rounded Corners
+   ========================================== */
+
+/* Apply rounded corners to all images */
+img {
+    border-radius: 0.75rem;
+}
+
+/* Apply rounded corners to cards and sections with shadows */
+[class*="shadow"] {
+    border-radius: 1rem;
+}
+
+/* Apply rounded corners to bordered containers */
+.border:not(.rounded-none):not(.rounded-full) {
+    border-radius: 0.75rem;
+}
+
+/* ==========================================
+   Preloader Animation
+   ========================================== */
+
+#preloader {
+    transition: transform 1.2s var(--transition-smooth), opacity 0.6s ease;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+#preloader.hide {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.preloader-text {
+    animation: fadeInText 0.8s var(--transition-smooth) 0.3s backwards;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================
+   Mobile Menu
+   ========================================== */
+
+.mobile-menu {
+    will-change: transform;
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+.mobile-menu-link {
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.4s var(--transition-smooth), transform 0.4s var(--transition-smooth), color 0.3s ease;
+}
+
+.mobile-menu.active .mobile-menu-link {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Stagger animation for menu links */
+.mobile-menu.active .mobile-menu-link:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.mobile-menu.active .mobile-menu-link:nth-child(2) {
+    transition-delay: 0.15s;
+}
+
+.mobile-menu.active .mobile-menu-link:nth-child(3) {
+    transition-delay: 0.2s;
+}
+
+.mobile-menu.active .mobile-menu-link:nth-child(4) {
+    transition-delay: 0.25s;
+}
+
+.mobile-menu.active .mobile-menu-link:nth-child(5) {
+    transition-delay: 0.3s;
+}
+
+.mobile-menu.active .mobile-menu-link:nth-child(6) {
+    transition-delay: 0.35s;
+}
+
+/* Prevent body scroll when menu is open */
+body.mobile-menu-open {
+    overflow: hidden;
+}
+
+/* ==========================================
+   Booking Dialog
+   ========================================== */
+
+.booking-dialog {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.booking-dialog.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.booking-dialog-card>div {
+    transform: scale(0.95);
+    opacity: 0;
+    transition: transform 0.3s var(--transition-smooth), opacity 0.3s ease;
+}
+
+.booking-dialog.active .booking-dialog-card>div {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Prevent body scroll when dialog is open */
+body.booking-dialog-open {
+    overflow: hidden;
+}
+
+/* ==========================================
+   Hero Section - Two-State Jägerhof Style
+   ========================================== */
+
+/* Video Background */
+.hero-video {
+    transition: opacity 0.7s var(--transition-smooth);
+    z-index: 1;
+}
+
+/* When active, fade out video */
+.hero.hero-active .hero-video {
+    opacity: 0;
+}
+
+/* Default Content (pure nature / alpine cuisine) */
+.hero-default-content {
+    transition: opacity 0.5s var(--transition-smooth);
+    z-index: 5;
+}
+
+/* When active, fade out default content */
+.hero.hero-active .hero-default-content {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Active Content (Your Home, at Resortarest) */
+.hero-active-content {
+    transition: opacity 0.5s var(--transition-smooth);
+    z-index: 5;
+}
+
+/* When active, show active content */
+.hero.hero-active .hero-active-content {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Floating Images in Default State */
+.hero-float-image {
+    transition: transform 0.6s var(--transition-smooth),
+        opacity 0.6s var(--transition-smooth);
+}
+
+.hero-float-image img {
+    transition: transform 0.8s var(--transition-smooth);
+}
+
+.hero-float-image:hover img {
+    transform: scale(1.05);
+}
+
+/* Hero Backgrounds (hidden by default) */
+.hero-bg {
+    opacity: 0;
+    transition: opacity 0.7s var(--transition-smooth);
+    z-index: 2;
+}
+
+.hero-bg.active {
+    opacity: 1;
+}
+
+.hero-bg img {
+    transition: transform 8s ease-out;
+}
+
+.hero-bg.active img {
+    transform: scale(1.05);
+}
+
+/* Section Navigation Links */
+.hero-section-link {
+    position: relative;
+    display: inline-block;
+    transition: all 0.3s var(--transition-smooth);
+}
+
+.hero-section-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 1px;
+    background: #E8E3D9;
+    transition: width 0.3s var(--transition-smooth);
+}
+
+.hero-section-link:hover::after,
+.hero-section-link.active::after {
+    width: 100%;
+}
+
+.hero-section-link.active {
+    color: #E8E3D9 !important;
+}
+
+/* Season Toggle */
+.season-btn {
+    transition: all 0.3s ease;
+}
+
+.season-btn:hover {
+    background: rgba(209, 122, 77, 0.1);
+}
+
+.season-btn.active {
+    background: rgba(209, 122, 77, 0.15);
+}
+
+.season-btn.active svg {
+    color: #D17A4D;
+}
+
+/* ==========================================
+   Sticky Navigation
+   ========================================== */
+
+#main-nav {
+    background: transparent;
+    color: white;
+    mix-blend-mode: difference;
+}
+
+#main-nav.scrolled {
+    background: rgba(61, 79, 61, 0.95);
+    mix-blend-mode: normal;
+    color: #E8E3D9;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+#main-nav.nav-hidden {
+    transform: translateY(-100%);
+}
+
+/* ==========================================
+   Scroll Reveal Animations
+   ========================================== */
+
+/* Base state for scroll reveal elements */
+[data-scroll-reveal] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity var(--animation-duration) var(--transition-smooth),
+        transform var(--animation-duration) var(--transition-smooth);
+}
+
+/* Revealed state */
+[data-scroll-reveal].revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered delays based on data-delay attribute */
+[data-scroll-reveal][data-delay="100"] {
+    transition-delay: 0.1s;
+}
+
+[data-scroll-reveal][data-delay="150"] {
+    transition-delay: 0.15s;
+}
+
+[data-scroll-reveal][data-delay="200"] {
+    transition-delay: 0.2s;
+}
+
+[data-scroll-reveal][data-delay="300"] {
+    transition-delay: 0.3s;
+}
+
+[data-scroll-reveal][data-delay="400"] {
+    transition-delay: 0.4s;
+}
+
+/* ==========================================
+   Parallax Effects
+   ========================================== */
+
+[data-parallax] {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+[data-parallax-container] {
+    overflow: hidden;
+}
+
+/* ==========================================
+   Image Effects
+   ========================================== */
+
+/* Grayscale to Color Transition */
+.image-reveal {
+    filter: grayscale(100%);
+    transition: filter 0.7s ease, transform 0.7s var(--transition-smooth);
+}
+
+.image-reveal:hover {
+    filter: grayscale(0%);
+    transform: scale(1.02);
+}
+
+/* Stacked Images with Depth */
+.image-stack {
+    transition: transform 0.4s var(--transition-smooth),
+        box-shadow 0.4s ease;
+}
+
+.image-stack:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+}
+
+/* ==========================================
+   Horizontal Marquee
+   ========================================== */
+
+.marquee-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.marquee {
+    display: inline-flex;
+    animation: scroll-marquee 30s linear infinite;
+}
+
+@keyframes scroll-marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause marquee on hover */
+.marquee-container:hover .marquee {
+    animation-play-state: paused;
+}
+
+/* ==========================================
+   Testimonial Cards
+   ========================================== */
+
+.testimonial-card {
+    transition: transform 0.5s var(--transition-smooth),
+        box-shadow 0.5s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================
+   Navigation Effects
+   ========================================== */
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #D17A4D;
+    transition: width 0.3s var(--transition-smooth);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* ==========================================
+   Scroll Indicator
+   ========================================== */
+
+.scroll-indicator {
+    animation: fade-bounce 2s ease-in-out infinite;
+}
+
+@keyframes fade-bounce {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
+
+/* ==========================================
+   Button Effects
+   ========================================== */
+
+button {
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+    transition: left 0.5s ease;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+/* ==========================================
+   Smooth Scroll Override
+   ========================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .marquee {
+        animation: none;
+    }
+
+    [data-parallax] {
+        transform: none !important;
+    }
+}
+
+/* ==========================================
+   Mobile Optimizations
+   ========================================== */
+
+@media (max-width: 768px) {
+
+    /* Disable parallax on mobile for performance */
+    [data-parallax] {
+        transform: none !important;
+    }
+
+    /* Simpler reveal animation */
+    [data-scroll-reveal] {
+        transform: translateY(20px);
+    }
+
+    /* Slower marquee on mobile */
+    .marquee {
+        animation-duration: 20s;
+    }
+
+    /* Adjust hero text size */
+    .hero-text-main {
+        font-size: 4rem !important;
+    }
+
+    .hero-text-script {
+        font-size: 2rem !important;
+    }
+}
+
+/* ==========================================
+   Loading Animation
+   ========================================== */
+
+.loading {
+    opacity: 0;
+    animation: fade-in 1s var(--transition-smooth) forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes fade-in {
+    to {
+        opacity: 1;
+    }
+}
+
+/* ==========================================
+   Scroll Expansion Section (Sustainability)
+   ========================================== */
+
+.expand-section {
+    isolation: isolate;
+}
+
+.expand-image {
+    position: relative;
+    will-change: clip-path;
+    transition: clip-path 0.05s linear;
+}
+
+/* Text content - initially hidden, fades in when expanded */
+.expand-content {
+    opacity: 0;
+    transition: opacity 0.5s var(--transition-smooth);
+    pointer-events: none;
+}
+
+.expand-content.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Individual element fade-in within content */
+.expand-fade-in {
+    transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth);
+    transform: translateY(20px);
+}
+
+.expand-content.visible .expand-fade-in {
+    opacity: 1 !important;
+    transform: translateY(0);
+}
+
+/* Mobile: simpler behavior */
+@media (max-width: 768px) {
+    .expand-image-wrapper {
+        height: 100% !important;
+    }
+
+    .expand-content {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .expand-fade-in {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .expand-spacer {
+        height: 100vh !important;
+    }
+}
